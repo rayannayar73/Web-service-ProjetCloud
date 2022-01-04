@@ -1,23 +1,42 @@
 package projetCloud.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "signalement")
 public class Signalement {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private long idType;
-	private long idUtilisateur;
+	
+	@Column(name = "idRegion", nullable = false)
 	private long idRegion;
+	
+	@Column(name = "longitude", nullable = false)
 	private float longitude;
+	
+	@Column(name = "latitude", nullable = false)
 	private float latitude;
+	
+	@Column(name = "description", nullable = false)
 	private String description;
+
+	@ManyToOne(cascade=CascadeType.ALL)
+	private Type type;
+	 
+	@ManyToOne(cascade=CascadeType.ALL)
+	private Utilisateur utilisateur;
 	
 	public Signalement() {
 		
@@ -25,16 +44,14 @@ public class Signalement {
 	
 	public Signalement(long idType, long idUtilisateur, long idRegion, float longitude, float latitude,
 			String description) {
-		this.idType = idType;
-		this.idUtilisateur = idUtilisateur;
+		this.type.setId(idType);
+		this.utilisateur.setId(idUtilisateur);
 		this.idRegion = idRegion;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.description = description;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
 		return id;
 	}
@@ -42,27 +59,23 @@ public class Signalement {
 		this.id = id;
 	}
 	
-	@Column(name = "idType", nullable = false)
-	public long getIdType() {
-		return idType;
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public Utilisateur getUtilisateur() {
+		return utilisateur;
 	}
 
 
-	public void setIdType(long idType) {
-		this.idType = idType;
+	public void setUtilisateur(Utilisateur utilisateur) {
+		this.utilisateur = utilisateur;
 	}
 
-	@Column(name = "idUtilisateur", nullable = false)
-	public long getIdUtilisateur() {
-		return idUtilisateur;
-	}
-
-
-	public void setIdUtilisateur(long idUtilisateur) {
-		this.idUtilisateur = idUtilisateur;
-	}
-
-	@Column(name = "idRegion", nullable = false)
 	public long getIdRegion() {
 		return idRegion;
 	}
@@ -72,7 +85,6 @@ public class Signalement {
 		this.idRegion = idRegion;
 	}
 
-	@Column(name = "longitude", nullable = false)
 	public float getLongitude() {
 		return longitude;
 	}
@@ -82,7 +94,6 @@ public class Signalement {
 		this.longitude = longitude;
 	}
 
-	@Column(name = "latitude", nullable = false)
 	public float getLatitude() {
 		return latitude;
 	}
@@ -92,7 +103,6 @@ public class Signalement {
 		this.latitude = latitude;
 	}
 
-	@Column(name = "description", nullable = false)
 	public String getDescription() {
 		return description;
 	}
@@ -104,7 +114,7 @@ public class Signalement {
 
 	@Override
 	public String toString() {
-		return "Signalement [id=" + id + ", idType=" + idType + ", idUtilisateur=" + idUtilisateur + ", idRegion="
+		return "Signalement [id=" + id + ", type=" + type.getNom() + ", idUtilisateur=" + utilisateur + ", idRegion="
 				+ idRegion + ", longitude=" + longitude + ", latitude=" + latitude + ", description=" + description
 				+ "]";
 	}
