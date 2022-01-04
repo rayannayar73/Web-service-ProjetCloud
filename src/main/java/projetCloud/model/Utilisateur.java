@@ -10,8 +10,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "utilisateur")
 public class Utilisateur {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	private String nom;
+	
+	@Column(name = "nom", nullable = false)
+	private String nom;	
+	
+	@Column(name = "prenom", nullable = false)
 	private String prenom;
 	
 	public Utilisateur() {
@@ -23,8 +30,6 @@ public class Utilisateur {
 		this.prenom = prenom;
 	}
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
 		return id;
 	}
@@ -32,7 +37,6 @@ public class Utilisateur {
 		this.id = id;
 	}
 	
-	@Column(name = "nom", nullable = false)
 	public String getNom() {
 		return nom;
 	}
@@ -40,7 +44,6 @@ public class Utilisateur {
 		this.nom = nom;
 	}
 	
-	@Column(name = "prenom", nullable = false)
 	public String getPrenom() {
 		return prenom;
 	}

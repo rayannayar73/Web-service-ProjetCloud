@@ -42,14 +42,14 @@ public class SignalementControlleur {
 	public Signalement createSignalement(@Validated @RequestBody Signalement signalement) {
 		return signalementRepository.save(signalement);
 	}
-
+	
 	@PutMapping("/signalement/{id}")
 	public ResponseEntity<Signalement> updateSignalement(@PathVariable(value = "id") Long signalementId,
 			@Validated @RequestBody Signalement signalementDetails) throws ResourceNotFoundException {
 		Signalement signalement = signalementRepository.findById(signalementId)
 				.orElseThrow(() -> new ResourceNotFoundException("signalement not found for this id :: " + signalementId));
-		signalement.setIdType(signalementDetails.getIdType());
-		signalement.setIdUtilisateur(signalementDetails.getIdUtilisateur());
+		signalement.setType(signalementDetails.getType());
+		signalement.setUtilisateur(signalementDetails.getUtilisateur());
 		signalement.setIdRegion(signalementDetails.getIdRegion());
 		signalement.setLongitude(signalementDetails.getLongitude());
 		signalement.setLatitude(signalementDetails.getLatitude());
