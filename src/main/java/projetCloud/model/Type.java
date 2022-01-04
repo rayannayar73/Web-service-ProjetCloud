@@ -5,13 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "type")
 public class Type {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
+	@Column(name = "nom")
 	private String nom;
 	
 	public Type() {
@@ -22,8 +27,6 @@ public class Type {
 		this.nom = nom;
 	}
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public long getId() {
 		return id;
 	}
@@ -31,7 +34,6 @@ public class Type {
 		this.id = id;
 	}
 	
-	@Column(name = "nom", nullable = false)
 	public String getNom() {
 		return nom;
 	}
