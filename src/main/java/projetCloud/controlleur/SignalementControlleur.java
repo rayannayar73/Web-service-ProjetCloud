@@ -8,6 +8,7 @@ import projetCloud.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,8 +49,8 @@ public class SignalementControlleur {
 			@Validated @RequestBody Signalement signalementDetails) throws ResourceNotFoundException {
 		Signalement signalement = signalementRepository.findById(signalementId)
 				.orElseThrow(() -> new ResourceNotFoundException("signalement not found for this id :: " + signalementId));
-		signalement.setIdType(signalementDetails.getIdType());
-		signalement.setIdUtilisateur(signalementDetails.getIdUtilisateur());
+		signalement.setType(signalementDetails.getType());
+		signalement.setUtilisateur(signalementDetails.getUtilisateur());
 		signalement.setIdRegion(signalementDetails.getIdRegion());
 		signalement.setLongitude(signalementDetails.getLongitude());
 		signalement.setLatitude(signalementDetails.getLatitude());
