@@ -32,7 +32,7 @@ public class Signalement {
 	@Column(name = "description", nullable = false)
 	private String description;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	private Type type;
 	 
 	@ManyToOne(cascade=CascadeType.ALL)
@@ -42,14 +42,15 @@ public class Signalement {
 		
 	}
 	
-	public Signalement(long idType, long idUtilisateur, long idRegion, float longitude, float latitude,
-			String description) {
-		this.type.setId(idType);
-		this.utilisateur.setId(idUtilisateur);
+	public Signalement(long id, long idRegion, float longitude, float latitude, String description, Type type,
+			Utilisateur utilisateur) {
+		this.id = id;
 		this.idRegion = idRegion;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.description = description;
+		this.type = type;
+		this.utilisateur = utilisateur;
 	}
 
 	public long getId() {

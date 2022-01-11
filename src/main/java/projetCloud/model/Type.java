@@ -26,6 +26,10 @@ public class Type {
 	public Type(String nom) {
 		this.nom = nom;
 	}
+	
+	public Type(long id) {
+		this.id = id;
+	}
 
 	public long getId() {
 		return id;
