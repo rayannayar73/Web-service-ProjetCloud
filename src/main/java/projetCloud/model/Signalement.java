@@ -20,9 +20,6 @@ public class Signalement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "idRegion", nullable = false)
-	private long idRegion;
-	
 	@Column(name = "longitude", nullable = false)
 	private float longitude;
 	
@@ -35,17 +32,20 @@ public class Signalement {
 	@ManyToOne(cascade=CascadeType.MERGE)
 	private Type type;
 	 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(cascade=CascadeType.MERGE)
 	private Utilisateur utilisateur;
+	
+	@ManyToOne(cascade=CascadeType.MERGE)
+	private Region region;
 	
 	public Signalement() {
 		
 	}
 	
-	public Signalement(long id, long idRegion, float longitude, float latitude, String description, Type type,
+	public Signalement(long id, Region region, float longitude, float latitude, String description, Type type,
 			Utilisateur utilisateur) {
 		this.id = id;
-		this.idRegion = idRegion;
+		this.region = region;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.description = description;
@@ -77,13 +77,13 @@ public class Signalement {
 		this.utilisateur = utilisateur;
 	}
 
-	public long getIdRegion() {
-		return idRegion;
+	public Region getRegion() {
+		return region;
 	}
 
 
-	public void setIdRegion(long idRegion) {
-		this.idRegion = idRegion;
+	public void setRegion(Region region) {
+		this.region = region;
 	}
 
 	public float getLongitude() {
@@ -115,8 +115,8 @@ public class Signalement {
 
 	@Override
 	public String toString() {
-		return "Signalement [id=" + id + ", type=" + type.getNom() + ", idUtilisateur=" + utilisateur + ", idRegion="
-				+ idRegion + ", longitude=" + longitude + ", latitude=" + latitude + ", description=" + description
+		return "Signalement [id=" + id + ", type=" + type.getNom() + ", Utilisateur=" + utilisateur.getNom()+ utilisateur.getPrenom() + ", Region="
+				+ region.getNom() + ", longitude=" + longitude + ", latitude=" + latitude + ", description=" + description
 				+ "]";
 	}
 	
