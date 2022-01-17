@@ -16,16 +16,14 @@ public class Region {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+	@Column(name = "nom")
+    private String nom;
+	
     public Region(long id, String nom) {
 		super();
 		this.id = id;
 		this.nom = nom;
 	}
-    public Region() {}
-	@Column(name = "nom")
-    private String nom;
-    
-    
     
     public Region() {
 		super();
