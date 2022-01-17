@@ -20,14 +20,11 @@ public class Type {
 	private String nom;
 	
 	public Type() {
-		
-	}
-	
-	public Type(String nom) {
-		this.nom = nom;
+		super();
 	}
 	
 	public Type(long id) {
+		super();
 		this.id = id;
 	}
 

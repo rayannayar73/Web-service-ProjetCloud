@@ -19,7 +19,16 @@ public class Region {
     @Column(name = "nom")
     private String nom;
     
-    public long getId(){
+    
+    
+    public Region() {
+		super();
+	}
+	public Region(long id) {
+		super();
+		this.id = id;
+	}
+	public long getId(){
         return id;
     }
     public void setId(long id){

@@ -29,13 +29,13 @@ public class Signalement {
 	@Column(name = "description", nullable = false)
 	private String description;
 
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne
 	private Type type;
 	 
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne
 	private Utilisateur utilisateur;
 	
-	@ManyToOne(cascade=CascadeType.MERGE)
+	@ManyToOne
 	private Region region;
 	
 	public Signalement() {
