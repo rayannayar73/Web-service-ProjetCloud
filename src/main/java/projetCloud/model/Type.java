@@ -20,11 +20,12 @@ public class Type {
 	private String nom;
 	
 	public Type() {
-		
+		super();
 	}
 	
-	public Type(String nom) {
-		this.nom = nom;
+	public Type(long id) {
+		super();
+		this.id = id;
 	}
 
 	public long getId() {
