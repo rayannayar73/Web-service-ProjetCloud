@@ -20,9 +20,6 @@ public class Signalement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "idRegion", nullable = false)
-	private long idRegion;
-	
 	@Column(name = "longitude", nullable = false)
 	private float longitude;
 	
@@ -32,24 +29,28 @@ public class Signalement {
 	@Column(name = "description", nullable = false)
 	private String description;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private Type type;
 	 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private Utilisateur utilisateur;
+	
+	@ManyToOne
+	private Region region;
 	
 	public Signalement() {
 		
 	}
 	
-	public Signalement(long idType, long idUtilisateur, long idRegion, float longitude, float latitude,
-			String description) {
-		this.type.setId(idType);
-		this.utilisateur.setId(idUtilisateur);
-		this.idRegion = idRegion;
+	public Signalement(long id, Region region, float longitude, float latitude, String description, Type type,
+			Utilisateur utilisateur) {
+		this.id = id;
+		this.region = region;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.description = description;
+		this.type = type;
+		this.utilisateur = utilisateur;
 	}
 
 	public long getId() {
@@ -76,13 +77,13 @@ public class Signalement {
 		this.utilisateur = utilisateur;
 	}
 
-	public long getIdRegion() {
-		return idRegion;
+	public Region getRegion() {
+		return region;
 	}
 
 
-	public void setIdRegion(long idRegion) {
-		this.idRegion = idRegion;
+	public void setRegion(Region region) {
+		this.region = region;
 	}
 
 	public float getLongitude() {
@@ -114,8 +115,8 @@ public class Signalement {
 
 	@Override
 	public String toString() {
-		return "Signalement [id=" + id + ", type=" + type.getNom() + ", idUtilisateur=" + utilisateur + ", idRegion="
-				+ idRegion + ", longitude=" + longitude + ", latitude=" + latitude + ", description=" + description
+		return "Signalement [id=" + id + ", type=" + type.getNom() + ", Utilisateur=" + utilisateur.getNom()+ utilisateur.getPrenom() + ", Region="
+				+ region.getNom() + ", longitude=" + longitude + ", latitude=" + latitude + ", description=" + description
 				+ "]";
 	}
 	

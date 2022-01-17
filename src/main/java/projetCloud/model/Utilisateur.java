@@ -25,6 +25,11 @@ public class Utilisateur {
 		
 	}
 	
+	public Utilisateur(long id) {
+		super();
+		this.id = id;
+	}
+
 	public Utilisateur(String nom, String prenom) {
 		this.nom = nom;
 		this.prenom = prenom;
