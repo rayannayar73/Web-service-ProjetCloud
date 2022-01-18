@@ -5,41 +5,47 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 
 @Entity
 @Table(name = "etat")
 public class Etat {
-	private long id;
-	private String nom;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+	@Column(name = "nom")
+    private String nom;
 	
-public Etat() {
-		
-	}
-	
-	public Etat(String nom) {
+    public Etat(long id, String nom) {
+		super();
+		this.id = id;
 		this.nom = nom;
 	}
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public long getId() {
-		return id;
+    
+    public Etat() {
+		super();
 	}
-	public void setId(long id) {
+	public Etat(long id) {
+		super();
 		this.id = id;
 	}
-	
-	@Column(name = "nom", nullable = false)
-	public String getNom() {
-		return nom;
-	}
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
-	
-	@Override
-	public String toString() {
-		return "Utilisateur [id=" + id + ", nom=" + nom + "]";
+	public long getId(){
+        return id;
+    }
+    public void setId(long id){
+        this.id=id;
+    }
+    public String getNom(){
+        return nom;
+    }
+    public void setNom(String nom){
+        this.nom=nom;
+    }
+    @Override
+    public String toString() {
+		return "Etat [id=" + id + ", nom=" + nom + "]";
 	}
 }
