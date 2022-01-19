@@ -41,9 +41,6 @@ public class Signalement {
 	private Type type;
 	
 	@ManyToOne
-	private Etat etat;
-	 
-	@ManyToOne
 	private Utilisateur utilisateur;
 	
 	@ManyToOne
@@ -109,14 +106,7 @@ public class Signalement {
 		this.region = region;
 	}
 	
-	public Etat getEtat() {
-		return etat;
-	}
-
-
-	public void setEtat(Etat etat) {
-		this.etat = etat;
-	}
+	
 
 	public float getLongitude() {
 		return longitude;
