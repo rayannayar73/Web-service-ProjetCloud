@@ -39,6 +39,9 @@ public class Signalement {
 
 	@ManyToOne
 	private Type type;
+	
+	@ManyToOne
+	private Etat etat;
 	 
 	@ManyToOne
 	private Utilisateur utilisateur;
@@ -62,6 +65,7 @@ public class Signalement {
 		this.dateSignalement = dateSignalement;
 		this.dateFinSignalement = dateFinSignalement;
 		this.type = type;
+		this.etat = etat;
 		this.utilisateur = utilisateur;
 		this.region = region;
 	}
@@ -103,6 +107,15 @@ public class Signalement {
 
 	public void setRegion(Region region) {
 		this.region = region;
+	}
+	
+	public Etat getEtat() {
+		return etat;
+	}
+
+
+	public void setEtat(Etat etat) {
+		this.etat = etat;
 	}
 
 	public float getLongitude() {

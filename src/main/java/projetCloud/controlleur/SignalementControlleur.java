@@ -50,6 +50,7 @@ public class SignalementControlleur {
 		Signalement signalement = signalementRepository.findById(signalementId)
 				.orElseThrow(() -> new ResourceNotFoundException("signalement not found for this id :: " + signalementId));
 		signalement.setType(signalementDetails.getType());
+		signalement.setEtat(signalementDetails.getEtat());
 		signalement.setUtilisateur(signalementDetails.getUtilisateur());
 		signalement.setDateSignalement(signalementDetails.getDateSignalement());
 		signalement.setDateFinSignalement(signalementDetails.getDateFinSignalement());
