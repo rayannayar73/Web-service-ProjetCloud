@@ -1,5 +1,6 @@
 package projetCloud.model;
 
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,6 +30,12 @@ public class Signalement {
 	
 	@Column(name = "description", nullable = false)
 	private String description;
+	
+	@Column(name = "dateSignalement", nullable = false)
+	private Date dateSignalement;
+	
+	@Column(name = "dateFinSignalement", nullable = true)
+	private Date dateFinSignalement;
 
 	@ManyToOne
 	private Type type;
@@ -45,11 +52,9 @@ public class Signalement {
 	public Signalement() {
 		
 	}
-	
-	public Signalement(long id, Region region, float longitude, float latitude, String description, Type type,
-			Utilisateur utilisateur) {
 	public Signalement(long id, float longitude, float latitude, String description, Date dateSignalement, Date dateFinSignalement, Type type,
 			Etat etat, Utilisateur utilisateur, Region region) {
+		super();
 		this.id = id;
 		this.longitude = longitude;
 		this.latitude = latitude;
