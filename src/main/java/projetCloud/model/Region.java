@@ -19,10 +19,14 @@ public class Region {
 	@Column(name = "nom")
     private String nom;
 	
-    public Region(long id, String nom) {
+	@Column(name = "image")
+	private String image;
+	
+    public Region(long id, String nom, String image) {
 		super();
 		this.id = id;
 		this.nom = nom;
+		this.image = image;
 	}
     
     public Region() {
@@ -44,8 +48,16 @@ public class Region {
     public void setNom(String nom){
         this.nom=nom;
     }
-    @Override
-    public String toString() {
-		return "Region [id=" + id + ", nom=" + nom + "]";
+    public String getImage() {
+		return image;
 	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	@Override
+	public String toString() {
+		return "Region [id=" + id + ", nom=" + nom + ", image=" + image + "]";
+	}
+	
 }

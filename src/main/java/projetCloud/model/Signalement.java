@@ -1,5 +1,6 @@
 package projetCloud.model;
 
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,19 +39,26 @@ public class Signalement {
 	@ManyToOne
 	private Region region;
 	
+	@ManyToOne
+	private Etat etat;
+	
 	public Signalement() {
 		
 	}
 	
 	public Signalement(long id, Region region, float longitude, float latitude, String description, Type type,
 			Utilisateur utilisateur) {
+	public Signalement(long id, float longitude, float latitude, String description, Date dateSignalement, Date dateFinSignalement, Type type,
+			Etat etat, Utilisateur utilisateur, Region region) {
 		this.id = id;
-		this.region = region;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.description = description;
+		this.dateSignalement = dateSignalement;
+		this.dateFinSignalement = dateFinSignalement;
 		this.type = type;
 		this.utilisateur = utilisateur;
+		this.region = region;
 	}
 
 	public long getId() {
@@ -113,13 +121,29 @@ public class Signalement {
 		this.description = description;
 	}
 
+	
+	public Date getDateSignalement() {
+		return dateSignalement;
+	}
+
+	public void setDateSignalement(Date dateSignalement) {
+		this.dateSignalement = dateSignalement;
+	}
+
+	public Date getDateFinSignalement() {
+		return dateFinSignalement;
+	}
+
+	public void setDateFinSignalement(Date dateFinSignalement) {
+		this.dateFinSignalement = dateFinSignalement;
+	}
+
+	
 	@Override
 	public String toString() {
-		return "Signalement [id=" + id + ", type=" + type.getNom() + ", Utilisateur=" + utilisateur.getNom()+ utilisateur.getPrenom() + ", Region="
-				+ region.getNom() + ", longitude=" + longitude + ", latitude=" + latitude + ", description=" + description
-				+ "]";
+		return "Signalement [id=" + id + ", longitude=" + longitude + ", latitude=" + latitude + ", description="
+				+ description + ", dateSignalement=" + dateSignalement+ ", dateFinSignalement=" + dateFinSignalement + ", type=" + type + ", etat=" + etat
+				+ ", utilisateur=" + utilisateur + ", region=" + region + "]";
 	}
-	
-	
 	
 }
