@@ -46,9 +46,6 @@ public class Signalement {
 	@ManyToOne
 	private Region region;
 	
-	@ManyToOne
-	private Etat etat;
-	
 	public Signalement() {
 		
 	}
@@ -78,12 +75,6 @@ public class Signalement {
 		return type;
 	}
 
-	public Etat getEtat() {
-		return etat;
-	}
-	public void setEtat(Etat etat) {
-		this.etat = etat;
-	}
 	public void setType(Type type) {
 		this.type = type;
 	}
