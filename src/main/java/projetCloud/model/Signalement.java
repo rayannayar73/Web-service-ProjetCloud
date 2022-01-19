@@ -46,6 +46,9 @@ public class Signalement {
 	@ManyToOne
 	private Region region;
 	
+	@ManyToOne
+	private Etat etat;
+	
 	public Signalement() {
 		
 	}
@@ -99,6 +102,12 @@ public class Signalement {
 	
 	
 
+	public Etat getEtat() {
+		return etat;
+	}
+	public void setEtat(Etat etat) {
+		this.etat = etat;
+	}
 	public float getLongitude() {
 		return longitude;
 	}
