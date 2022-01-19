@@ -52,6 +52,8 @@ public class SignalementControlleur {
 		signalement.setType(signalementDetails.getType());
 		signalement.setEtat(signalementDetails.getEtat());
 		signalement.setUtilisateur(signalementDetails.getUtilisateur());
+		signalement.setDateSignalement(signalementDetails.getDateSignalement());
+		signalement.setDateFinSignalement(signalementDetails.getDateFinSignalement());
 		signalement.setRegion(signalementDetails.getRegion());
 		signalement.setLongitude(signalementDetails.getLongitude());
 		signalement.setLatitude(signalementDetails.getLatitude());
