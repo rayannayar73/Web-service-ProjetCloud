@@ -52,6 +52,14 @@ public class Signalement {
 	public Signalement() {
 		
 	}
+	
+	
+	public Signalement(long id) {
+		super();
+		this.id = id;
+	}
+
+
 	public Signalement(long id, float longitude, float latitude, String description, Date dateSignalement, Date dateFinSignalement, Type type,
 			Etat etat, Utilisateur utilisateur, Region region) {
 		super();
@@ -100,8 +108,6 @@ public class Signalement {
 		this.region = region;
 	}
 	
-	
-
 	public Etat getEtat() {
 		return etat;
 	}

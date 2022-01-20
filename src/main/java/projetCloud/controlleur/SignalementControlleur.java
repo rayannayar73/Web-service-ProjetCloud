@@ -1,7 +1,14 @@
 package projetCloud.controlleur;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
+
 import projetCloud.exception.*;
 //import javax.validation.Valid;
 
@@ -25,10 +32,21 @@ import projetCloud.repository.*;
 public class SignalementControlleur {
 	@Autowired
 	private SignalementRepository signalementRepository;
+	private NotificationRepository notificationRepository;
 
 	@GetMapping("/signalement")
 	public List<Signalement> getAllSignalement() {
 		return signalementRepository.findAll();
+	}
+	
+	@GetMapping("/signalement/utilisateur/{id}")
+	public List<Signalement> getAllSignalementByUtilisateur(@PathVariable(value = "id") Long utilisateurId) {
+		return signalementRepository.findSignalementByUser(utilisateurId);
+	}
+	
+	@GetMapping("/signalement/region/{id}")
+	public List<Signalement> getAllSignalementByRegion(@PathVariable(value = "id") Long regionId) {
+		return signalementRepository.findSignalementByRegion(regionId);
 	}
 
 	@GetMapping("/signalement/{id}")
@@ -40,7 +58,9 @@ public class SignalementControlleur {
 	}
 
 	@PostMapping("/signalement")
-	public Signalement createSignalement(@Validated @RequestBody Signalement signalement) {
+	public Signalement createSignalement(@Validated @RequestBody Signalement signalement) throws ParseException {
+		Date daty = new Date();
+		signalement.setDateSignalement(daty);
 		return signalementRepository.save(signalement);
 	}
 	
@@ -49,6 +69,7 @@ public class SignalementControlleur {
 			@Validated @RequestBody Signalement signalementDetails) throws ResourceNotFoundException {
 		Signalement signalement = signalementRepository.findById(signalementId)
 				.orElseThrow(() -> new ResourceNotFoundException("signalement not found for this id :: " + signalementId));
+		Date daty = new Date();
 		signalement.setType(signalementDetails.getType());
 		signalement.setEtat(signalementDetails.getEtat());
 		signalement.setUtilisateur(signalementDetails.getUtilisateur());
@@ -58,6 +79,10 @@ public class SignalementControlleur {
 		signalement.setLongitude(signalementDetails.getLongitude());
 		signalement.setLatitude(signalementDetails.getLatitude());
 		signalement.setDescription(signalementDetails.getDescription());
+		if(signalementDetails.getEtat().getId()==3) {
+//			notificationRepository.save(new Notification(signalement));
+			signalement.setDateFinSignalement(daty);
+		}
 		final Signalement updatedSignalement = signalementRepository.save(signalement);
 		return ResponseEntity.ok(updatedSignalement);
 	}
