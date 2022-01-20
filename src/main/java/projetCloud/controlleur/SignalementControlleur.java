@@ -49,6 +49,36 @@ public class SignalementControlleur {
 		return signalementRepository.findSignalementByRegion(regionId);
 	}
 
+	@GetMapping("/signalement/jour")
+	public List<List<Object>> getAllSignalementByDay() {
+		return signalementRepository.listeSignalementParJour();
+	}
+	
+	@GetMapping("/signalement/mois")
+	public List<List<Object>> getAllSignalementByMonth() {
+		return signalementRepository.listeSignalementParMois();
+	}
+	
+	@GetMapping("/signalement-Terminé/jour")
+	public List<List<Object>> getAllSignalementTerminéByDay() {
+		return signalementRepository.listeSignalementTerminéParJour();
+	}
+	
+	@GetMapping("/signalement-Terminé/mois")
+	public List<List<Object>> getAllSignalementTerminéByMonth() {
+		return signalementRepository.listeSignalementTerminéParMois();
+	}
+	
+	@GetMapping("/signalement-Terminé/nombre")
+	public int getNombreSignalementTerminé() {
+		return signalementRepository.nombreSignalementTerminé();
+	}
+	
+	@GetMapping("/signalement/nombre")
+	public int getNombreSignalement() {
+		return signalementRepository.nombreSignalement();
+	}
+
 	@GetMapping("/signalement/{id}")
 	public ResponseEntity<Signalement> getSignalementById(@PathVariable(value = "id") Long signalementId)
 			throws ResourceNotFoundException {
