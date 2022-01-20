@@ -48,8 +48,6 @@ public class EtatController {
 			@Validated @RequestBody Etat etatDetails) throws ResourceNotFoundException {
 		Etat etat = etatRepository.findById(etatId)
 				.orElseThrow(() -> new ResourceNotFoundException("Etat not found for this id :: " + etatId));
-
-		etat.setId(etatDetails.getId());
 		etat.setNom(etatDetails.getNom());
 		final Etat updatedEtat = etatRepository.save(etat);
 		return ResponseEntity.ok(updatedEtat);
