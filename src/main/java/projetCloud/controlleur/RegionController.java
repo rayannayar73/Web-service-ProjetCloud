@@ -42,14 +42,17 @@ public class RegionController {
 	public Region createRegion(@Validated @RequestBody Region region) {
 		return regionRepository.save(region);
 	}
-//	@PutMapping("/regions/{id}")
-//	public ResponseEntity<Region> updateRegion(@PathVariable(value = "id") Long regionId,@Validated @RequestBody Region regionDetails) throws ResourceNotFoundException {
-//		Region region = regionRepository.findById(regionId).orElseThrow(() -> new ResourceNotFoundException("Region not found for this id :: " + regionId));
-//
-//		region.setNom(regionDetails.getNom());
-//		final Region updatedRegion = regionRepository.save(region);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       = regionRepository.save(region);
-//		return ResponseEntity.ok(updatedRegion);
-//	}
+	
+	@PutMapping("/regions/{id}")
+	public ResponseEntity<Region> updateType(@PathVariable(value = "id") Long regionId,
+			@Validated @RequestBody Region regionDetails) throws ResourceNotFoundException {
+		Region region = regionRepository.findById(regionId)
+				.orElseThrow(() -> new ResourceNotFoundException("type not found for this id :: " + regionId));
+		region.setImage(regionDetails.getImage());
+		final Region updatedRegion = regionRepository.save(region);
+		return ResponseEntity.ok(updatedRegion);
+	}
+	
 	@DeleteMapping("/regions/{id}")
 	public Map<String, Boolean> deleteRegion(@PathVariable(value = "id") Long regionId)
 			throws ResourceNotFoundException {
