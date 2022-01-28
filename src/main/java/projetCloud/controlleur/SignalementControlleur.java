@@ -15,7 +15,6 @@ import projetCloud.exception.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -67,6 +66,16 @@ public class SignalementControlleur {
 	@GetMapping("/signalement-Terminé/mois")
 	public List<List<Object>> getAllSignalementTerminéByMonth() {
 		return signalementRepository.listeSignalementTerminéParMois();
+	}
+
+	@GetMapping("/signalement-Nouveau/jour")
+	public List<List<Object>> getAllSignalementNouveauByDay() {
+		return signalementRepository.listeSignalementNouveauParJour();
+	}
+	
+	@GetMapping("/signalement-Nouveau/mois")
+	public List<List<Object>> getAllSignalementNouveauByMonth() {
+		return signalementRepository.listeSignalementNouveauParMois();
 	}
 	
 	@GetMapping("/signalement-Terminé/nombre")

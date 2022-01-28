@@ -58,6 +58,25 @@ public interface SignalementRepository extends JpaRepository<Signalement, Long>{
 			+ "order by 1 desc,2 desc",nativeQuery=true)
 	List<List<Object>> listeSignalementTerminéParMois();
 	
+	@Query(value="select extract(year from signalement.date_signalement) as année,\r\n"
+			+ "		to_char(signalement.date_signalement,'Mon') as mois,\r\n"
+			+ "       extract(day from signalement.date_signalement) as jour,\r\n"
+			+ "       count(signalement) as nombreSignalement\r\n"
+			+ "from signalement\r\n"
+			+ "where signalement.etat_id=1\r\n"
+			+ "group by 1,2,3\r\n"
+			+ "order by 1 desc,2 desc,3 desc",nativeQuery=true)
+	List<List<Object>> listeSignalementNouveauParJour();
+	
+	@Query(value="select extract(year from signalement.date_signalement) as année,\r\n"
+			+ "		to_char(signalement.date_signalement,'Mon') as mois,\r\n"
+			+ "       count(signalement) as nombreSignalement\r\n"
+			+ "from signalement\r\n"
+			+ "where signalement.etat_id=1\r\n"
+			+ "group by 1,2\r\n"
+			+ "order by 1 desc,2 desc",nativeQuery=true)
+	List<List<Object>> listeSignalementNouveauParMois();
+	
 	@Query(value="select count(signalement) as nombreSignalement\r\n"
 			+ "from signalement\r\n"
 			+ "where signalement.etat_id=3",nativeQuery=true)
