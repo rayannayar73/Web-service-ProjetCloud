@@ -52,6 +52,10 @@ public class SignalementControlleur {
 	public List<List<Object>> getAllSignalementByDay() {
 		return signalementRepository.listeSignalementParJour();
 	}
+	@GetMapping("/signalement-nombre/jour")
+	public List<List<Object>> getnombreSignalementByDay() {
+		return signalementRepository.nombreSignalementParJour();
+	}
 	
 	@GetMapping("/signalement/mois")
 	public List<List<Object>> getAllSignalementByMonth() {
@@ -62,6 +66,11 @@ public class SignalementControlleur {
 	public List<List<Object>> getAllSignalementTerminéByDay() {
 		return signalementRepository.listeSignalementTerminéParJour();
 	}
+
+	@GetMapping("/signalement-Terminé-nombre/jour")
+	public List<List<Object>> getNombreSignalementTerminéByDay() {
+		return signalementRepository.nombreSignalementTerminéParJour();
+	}
 	
 	@GetMapping("/signalement-Terminé/mois")
 	public List<List<Object>> getAllSignalementTerminéByMonth() {
@@ -71,6 +80,11 @@ public class SignalementControlleur {
 	@GetMapping("/signalement-Nouveau/jour")
 	public List<List<Object>> getAllSignalementNouveauByDay() {
 		return signalementRepository.listeSignalementNouveauParJour();
+	}
+
+	@GetMapping("/signalement-Nouveau-nombre/jour")
+	public List<List<Object>> getNombreSignalementNouveauByDay() {
+		return signalementRepository.nombreSignalementNouveauParJour();
 	}
 	
 	@GetMapping("/signalement-Nouveau/mois")

@@ -30,7 +30,17 @@ public interface SignalementRepository extends JpaRepository<Signalement, Long>{
 			+ "group by 1,2,3\r\n"
 			+ "order by 1 desc,2 desc,3 desc",nativeQuery=true)
 	List<List<Object>> listeSignalementParJour();
-	
+
+	@Query(value="select nombreSignalement from ("
+			+"select extract(year from signalement.date_signalement) as année,\r\n"
+			+ "		to_char(signalement.date_signalement,'Mon') as mois,\r\n"
+			+ "       extract(day from signalement.date_signalement) as jour,\r\n"
+			+ "       count(signalement) as nombreSignalement\r\n"
+			+ "from signalement\r\n"
+			+ "group by 1,2,3\r\n"
+			+ "order by 1 desc,2 desc,3 desc) as isa",nativeQuery=true)
+	List<List<Object>> nombreSignalementParJour();
+
 	@Query(value="select extract(year from signalement.date_signalement) as année,\r\n"
 			+ "		to_char(signalement.date_signalement,'Mon') as mois,\r\n"
 			+ "       count(signalement) as nombreSignalement\r\n"
@@ -48,6 +58,17 @@ public interface SignalementRepository extends JpaRepository<Signalement, Long>{
 			+ "group by 1,2,3\r\n"
 			+ "order by 1 desc,2 desc,3 desc",nativeQuery=true)
 	List<List<Object>> listeSignalementTerminéParJour();
+
+	@Query(value="select nombreSignalement from ("
+			+"select extract(year from signalement.date_signalement) as année,\r\n"
+			+ "		to_char(signalement.date_signalement,'Mon') as mois,\r\n"
+			+ "       extract(day from signalement.date_signalement) as jour,\r\n"
+			+ "       count(signalement) as nombreSignalement\r\n"
+			+ "from signalement\r\n"
+			+ "where signalement.etat_id=3\r\n"
+			+ "group by 1,2,3\r\n"
+			+ "order by 1 desc,2 desc,3 desc) as isa",nativeQuery=true)
+	List<List<Object>> nombreSignalementTerminéParJour();
 	
 	@Query(value="select extract(year from signalement.date_signalement) as année,\r\n"
 			+ "		to_char(signalement.date_signalement,'Mon') as mois,\r\n"
@@ -67,6 +88,17 @@ public interface SignalementRepository extends JpaRepository<Signalement, Long>{
 			+ "group by 1,2,3\r\n"
 			+ "order by 1 desc,2 desc,3 desc",nativeQuery=true)
 	List<List<Object>> listeSignalementNouveauParJour();
+	
+	@Query(value="select nombreSignalement from ("
+			+"select extract(year from signalement.date_signalement) as année,\r\n"
+			+ "		to_char(signalement.date_signalement,'Mon') as mois,\r\n"
+			+ "       extract(day from signalement.date_signalement) as jour,\r\n"
+			+ "       count(signalement) as nombreSignalement\r\n"
+			+ "from signalement\r\n"
+			+ "where signalement.etat_id=1\r\n"
+			+ "group by 1,2,3\r\n"
+			+ "order by 1 desc,2 desc,3 desc) as isa",nativeQuery=true)
+	List<List<Object>> nombreSignalementNouveauParJour();
 	
 	@Query(value="select extract(year from signalement.date_signalement) as année,\r\n"
 			+ "		to_char(signalement.date_signalement,'Mon') as mois,\r\n"
