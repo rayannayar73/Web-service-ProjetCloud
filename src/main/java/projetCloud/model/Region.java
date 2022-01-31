@@ -16,16 +16,27 @@ public class Region {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    public Region(long id, String nom) {
+	@Column(name = "nom")
+    private String nom;
+	
+	@Column(name = "image")
+	private String image;
+	
+    public Region(long id, String nom, String image) {
 		super();
 		this.id = id;
 		this.nom = nom;
+		this.image = image;
 	}
-    public Region() {}
-	@Column(name = "nom")
-    private String nom;
     
-    public long getId(){
+    public Region() {
+		super();
+	}
+	public Region(long id) {
+		super();
+		this.id = id;
+	}
+	public long getId(){
         return id;
     }
     public void setId(long id){
@@ -37,8 +48,16 @@ public class Region {
     public void setNom(String nom){
         this.nom=nom;
     }
-    @Override
-    public String toString() {
-		return "Region [id=" + id + ", nom=" + nom + "]";
+    public String getImage() {
+		return image;
 	}
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	@Override
+	public String toString() {
+		return "Region [id=" + id + ", nom=" + nom + ", image=" + image + "]";
+	}
+	
 }

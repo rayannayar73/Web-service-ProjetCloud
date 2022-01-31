@@ -22,10 +22,16 @@ public class Utilisateur {
 	private String prenom;
 	
 	public Utilisateur() {
-		
+		super();
 	}
 	
+	public Utilisateur(long id) {
+		super();
+		this.id = id;
+	}
+
 	public Utilisateur(String nom, String prenom) {
+		super();
 		this.nom = nom;
 		this.prenom = prenom;
 	}

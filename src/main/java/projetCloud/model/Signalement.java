@@ -1,5 +1,7 @@
 package projetCloud.model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,9 +22,6 @@ public class Signalement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "idRegion", nullable = false)
-	private long idRegion;
-	
 	@Column(name = "longitude", nullable = false)
 	private float longitude;
 	
@@ -31,25 +30,41 @@ public class Signalement {
 	
 	@Column(name = "description", nullable = false)
 	private String description;
+	
+	@Column(name = "dateSignalement", nullable = false)
+	private Date dateSignalement;
+	
+	@Column(name = "dateFinSignalement", nullable = true)
+	private Date dateFinSignalement;
 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private Type type;
+	
+	@ManyToOne
+	private Etat etat;
 	 
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private Utilisateur utilisateur;
+	
+	@ManyToOne
+	private Region region;
 	
 	public Signalement() {
 		
 	}
-	
-	public Signalement(long idType, long idUtilisateur, long idRegion, float longitude, float latitude,
-			String description) {
-		this.type.setId(idType);
-		this.utilisateur.setId(idUtilisateur);
-		this.idRegion = idRegion;
+	public Signalement(long id, float longitude, float latitude, String description, Date dateSignalement, Date dateFinSignalement, Type type,
+			Etat etat, Utilisateur utilisateur, Region region) {
+		super();
+		this.id = id;
 		this.longitude = longitude;
 		this.latitude = latitude;
 		this.description = description;
+		this.dateSignalement = dateSignalement;
+		this.dateFinSignalement = dateFinSignalement;
+		this.type = type;
+		this.etat = etat;
+		this.utilisateur = utilisateur;
+		this.region = region;
 	}
 
 	public long getId() {
@@ -76,13 +91,22 @@ public class Signalement {
 		this.utilisateur = utilisateur;
 	}
 
-	public long getIdRegion() {
-		return idRegion;
+	public Region getRegion() {
+		return region;
 	}
 
 
-	public void setIdRegion(long idRegion) {
-		this.idRegion = idRegion;
+	public void setRegion(Region region) {
+		this.region = region;
+	}
+	
+	public Etat getEtat() {
+		return etat;
+	}
+
+
+	public void setEtat(Etat etat) {
+		this.etat = etat;
 	}
 
 	public float getLongitude() {
@@ -112,13 +136,29 @@ public class Signalement {
 		this.description = description;
 	}
 
+	
+	public Date getDateSignalement() {
+		return dateSignalement;
+	}
+
+	public void setDateSignalement(Date dateSignalement) {
+		this.dateSignalement = dateSignalement;
+	}
+
+	public Date getDateFinSignalement() {
+		return dateFinSignalement;
+	}
+
+	public void setDateFinSignalement(Date dateFinSignalement) {
+		this.dateFinSignalement = dateFinSignalement;
+	}
+
+	
 	@Override
 	public String toString() {
-		return "Signalement [id=" + id + ", type=" + type.getNom() + ", idUtilisateur=" + utilisateur + ", idRegion="
-				+ idRegion + ", longitude=" + longitude + ", latitude=" + latitude + ", description=" + description
-				+ "]";
+		return "Signalement [id=" + id + ", longitude=" + longitude + ", latitude=" + latitude + ", description="
+				+ description + ", dateSignalement=" + dateSignalement+ ", dateFinSignalement=" + dateFinSignalement + ", type=" + type + ", etat=" + etat
+				+ ", utilisateur=" + utilisateur + ", region=" + region + "]";
 	}
-	
-	
 	
 }
