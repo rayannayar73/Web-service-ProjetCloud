@@ -39,11 +39,11 @@ public class HibernateExampleApplication  implements CommandLineRunner {
 		etatRepository.save(new Etat(3, "terminé"));
 
 		Date ajd = new Date();
-		signalementRepository.save(new Signalement(new Date(ajd.getTime()-(1000*60*60*72)),new Etat(1)));
-		signalementRepository.save(new Signalement(new Date(ajd.getTime()-(1000*60*60*48)),new Etat(1)));
-		signalementRepository.save(new Signalement(new Date(ajd.getTime()-(1000*60*60*48)),new Etat(3)));
-		signalementRepository.save(new Signalement(new Date(ajd.getTime()-(1000*60*60*24)),new Etat(3)));
-		signalementRepository.save(new Signalement(new Date(ajd.getTime()-(1000*60*60*72)),new Etat(1)));
+		// signalementRepository.save(new Signalement(new Date(ajd.getTime()-(1000*60*60*72)),new Etat(1)));
+		// signalementRepository.save(new Signalement(new Date(ajd.getTime()-(1000*60*60*48)),new Etat(1)));
+		// signalementRepository.save(new Signalement(new Date(ajd.getTime()-(1000*60*60*48)),new Etat(3)));
+		// signalementRepository.save(new Signalement(new Date(ajd.getTime()-(1000*60*60*24)),new Etat(3)));
+		// signalementRepository.save(new Signalement(new Date(ajd.getTime()-(1000*60*60*72)),new Etat(1)));
 	}
 
 }
