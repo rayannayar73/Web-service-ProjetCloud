@@ -22,19 +22,19 @@ public class Signalement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "longitude", nullable = true)
+	@Column(name = "longitude")
 	private float longitude;
 	
-	@Column(name = "latitude", nullable = true)
+	@Column(name = "latitude")
 	private float latitude;
 	
-	@Column(name = "description", nullable = true)
+	@Column(name = "description")
 	private String description;
 	
-	@Column(name = "dateSignalement", nullable = true)
+	@Column(name = "dateSignalement")
 	private Date dateSignalement;
 	
-	@Column(name = "dateFinSignalement", nullable = true)
+	@Column(name = "dateFinSignalement")
 	private Date dateFinSignalement;
 
 	@ManyToOne
