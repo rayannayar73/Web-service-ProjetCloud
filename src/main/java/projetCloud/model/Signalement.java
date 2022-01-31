@@ -22,16 +22,16 @@ public class Signalement {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "longitude", nullable = false)
+	@Column(name = "longitude", nullable = true)
 	private float longitude;
 	
-	@Column(name = "latitude", nullable = false)
+	@Column(name = "latitude", nullable = true)
 	private float latitude;
 	
-	@Column(name = "description", nullable = false)
+	@Column(name = "description", nullable = true)
 	private String description;
 	
-	@Column(name = "dateSignalement", nullable = false)
+	@Column(name = "dateSignalement", nullable = true)
 	private Date dateSignalement;
 	
 	@Column(name = "dateFinSignalement", nullable = true)
@@ -73,6 +73,12 @@ public class Signalement {
 		this.etat = etat;
 		this.utilisateur = utilisateur;
 		this.region = region;
+	}
+
+	public Signalement( Date dateSignalement, Etat etat) {
+		super();
+		this.dateSignalement = dateSignalement;
+		this.etat = etat;
 	}
 
 	public long getId() {

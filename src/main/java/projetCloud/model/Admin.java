@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "utilisateur")
-public class Utilisateur {
+@Table(name = "admin")
+public class Admin {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,23 +20,23 @@ public class Utilisateur {
 	
 	@Column(name = "prenom", nullable = false)
 	private String prenom;
-	
+
     @Column(name = "email", nullable = false)
 	private String email;	
 	
 	@Column(name = "mdp", nullable = false)
 	private String mdp;
 	
-	public Utilisateur() {
+	public Admin() {
 		super();
 	}
 	
-	public Utilisateur(long id) {
+	public Admin(long id) {
 		super();
 		this.id = id;
 	}
 
-	public Utilisateur(String nom, String prenom, String email, String mdp) {
+	public Admin(String nom, String prenom, String email, String mdp) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -67,8 +67,9 @@ public class Utilisateur {
 
 	@Override
 	public String toString() {
-		return "Utilisateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom +" email="+email +" mdp="+ mdp + "]";
+		return "Utilisateur [id=" + id + ", nom=" + nom + ", prenom=" + prenom + "]";
 	}
+
 
     public String getEmail() {
         return email;
