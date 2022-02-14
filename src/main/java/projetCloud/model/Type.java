@@ -28,6 +28,12 @@ public class Type {
 		this.id = id;
 	}
 
+	public Type(long id, String nom) {
+		super();
+		this.id = id;
+		this.nom = nom;
+	}
+
 	public long getId() {
 		return id;
 	}

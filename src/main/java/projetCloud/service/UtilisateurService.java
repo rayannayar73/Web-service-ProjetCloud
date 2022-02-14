@@ -15,13 +15,12 @@ import projetCloud.repository.UtilisateurRepository;
 public class UtilisateurService {
     @Autowired
     private UtilisateurRepository utilisateurRepository;
-
     
     public UtilisateurService() {
 
     }
 
-    public void createAdmin(Utilisateur user) throws Exception{
+    public Utilisateur createAdmin(Utilisateur user) throws Exception{
         String[] listeAccent = {"é","è","à","ù","â","Ä"};
         Boolean containsAccent = false;
         String regexEmail = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&’*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
@@ -29,9 +28,10 @@ public class UtilisateurService {
         if(user.getMdp().length()<8)throw new Exception("nombre de caractère doit etre superieur à 8");
         for (String lettre : listeAccent) {
             user.getMdp().contains(lettre);
+            containsAccent = true;
         }
-        if(!containsAccent)throw new Exception("format mot de passe incorrect");
-        else utilisateurRepository.save(user);
+        if(containsAccent)throw new Exception("format mot de passe incorrect");
+        else {utilisateurRepository.save(user);return user;}
     }
 
 }

@@ -36,6 +36,13 @@ public class Utilisateur {
 		this.id = id;
 	}
 
+	public Utilisateur(long id,String nom, String prenom, String email, String mdp) {
+		super();
+		this.nom = nom;
+		this.prenom = prenom;
+        this.email = email;
+		this.mdp = mdp;
+	}
 	public Utilisateur(String nom, String prenom, String email, String mdp) {
 		super();
 		this.nom = nom;

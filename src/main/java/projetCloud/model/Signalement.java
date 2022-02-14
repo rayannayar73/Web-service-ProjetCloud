@@ -75,15 +75,32 @@ public class Signalement {
 		this.region = region;
 	}
 
-	public Signalement( Date dateSignalement, Etat etat) {
+	public Signalement(float longitude, float latitude, String description, Date dateSignalement, Type type,
+			Etat etat, Utilisateur utilisateur, Region region) {
+		super();
+		this.longitude = longitude;
+		this.latitude = latitude;
+		this.description = description;
+		this.dateSignalement = dateSignalement;
+		this.type = type;
+		this.etat = etat;
+		this.utilisateur = utilisateur;
+		this.region = region;
+	}
+
+	public Signalement(Date dateSignalement, Type type,
+			Etat etat, Utilisateur utilisateur) {
 		super();
 		this.dateSignalement = dateSignalement;
+		this.type = type;
 		this.etat = etat;
+		this.utilisateur = utilisateur;
 	}
 
 	public long getId() {
 		return id;
 	}
+	
 	public void setId(long id) {
 		this.id = id;
 	}

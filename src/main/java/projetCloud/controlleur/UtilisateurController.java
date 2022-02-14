@@ -18,11 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import projetCloud.model.Utilisateur;
 import projetCloud.repository.UtilisateurRepository;
+import projetCloud.service.UtilisateurService;
 @RestController
 @RequestMapping("/ato")
 public class UtilisateurController {
 	@Autowired
 	private UtilisateurRepository utilisateurRepository;
+
+	@Autowired
+	private UtilisateurService utilisateurService;
 
 	@GetMapping("/utilisateur")
 	public List<Utilisateur> getAllEmployees() {
@@ -38,8 +42,8 @@ public class UtilisateurController {
 	}
 
 	@PostMapping("/utilisateur")
-	public Utilisateur createUtilisateur(@Validated @RequestBody Utilisateur utilisateur) {
-		return utilisateurRepository.save(utilisateur);
+	public Utilisateur createUtilisateur(@Validated @RequestBody Utilisateur utilisateur) throws Exception {
+		return utilisateurService.createAdmin(utilisateur);
 	}
 
 	@PutMapping("/utilisateur/{id}")
