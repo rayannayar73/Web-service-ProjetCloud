@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import projetCloud.model.Admin;
 import projetCloud.model.Utilisateur;
 import projetCloud.repository.UtilisateurRepository;
 import projetCloud.service.UtilisateurService;
@@ -41,8 +42,8 @@ public class UtilisateurController {
 		return ResponseEntity.ok().body(utilisateur);
 	}
 
-	@PostMapping("/utilisateur")
-	public Utilisateur createUtilisateur(@Validated @RequestBody Utilisateur utilisateur) throws Exception {
+	@PostMapping("/admin")
+	public Admin createUtilisateur(@Validated @RequestBody Admin utilisateur) throws Exception {
 		return utilisateurService.createAdmin(utilisateur);
 	}
 
