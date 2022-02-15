@@ -26,12 +26,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import projetCloud.model.*;
 import projetCloud.repository.*;
+import projetCloud.service.NotificationService;
 @RestController
 @RequestMapping("/ato")
 public class SignalementControlleur {
 	@Autowired
 	private SignalementRepository signalementRepository;
-	private NotificationRepository notificationRepository;
+
+	@Autowired
+	private NotificationService notificationService;
 
 	@GetMapping("/signalement")
 	public List<Signalement> getAllSignalement() {
@@ -133,7 +136,8 @@ public class SignalementControlleur {
 		signalement.setLatitude(signalementDetails.getLatitude());
 		signalement.setDescription(signalementDetails.getDescription());
 		if(signalementDetails.getEtat().getId()==3) {
-//			notificationRepository.save(new Notification(signalement));
+			Notification notification = new Notification(signalement);
+			notificationService.createNotification(notification);
 			signalement.setDateFinSignalement(daty);
 		}
 		final Signalement updatedSignalement = signalementRepository.save(signalement);
