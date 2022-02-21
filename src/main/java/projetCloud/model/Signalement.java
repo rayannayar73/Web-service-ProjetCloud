@@ -88,9 +88,11 @@ public class Signalement {
 		this.region = region;
 	}
 
-	public Signalement(Date dateSignalement, Type type,
+	public Signalement(float longi, float lag, Date dateSignalement, Type type,
 			Etat etat, Utilisateur utilisateur) {
 		super();
+		this.longitude = longi;
+		this.latitude = lag;
 		this.dateSignalement = dateSignalement;
 		this.type = type;
 		this.etat = etat;
