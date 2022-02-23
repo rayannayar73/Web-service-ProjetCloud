@@ -7,12 +7,19 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.TimeZone;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import projetCloud.exception.*;
 //import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,30 +29,81 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javafx.beans.binding.BooleanExpression;
+
+import com.google.common.base.Joiner;
 
 import projetCloud.model.*;
 import projetCloud.repository.*;
+import projetCloud.service.NotificationService;
+import projetCloud.service.SignalementService;
 @RestController
 @RequestMapping("/ato")
 public class SignalementControlleur {
 	@Autowired
 	private SignalementRepository signalementRepository;
-	private NotificationRepository notificationRepository;
+
+	@Autowired
+	private SignalementService signalementService;
+
+	private int nbrPage = 5;
+
+	private NotificationService notificationService;
 
 	@GetMapping("/signalement")
-	public List<Signalement> getAllSignalement() {
-		return signalementRepository.findAll();
+	public Page<Signalement> getAllSignalement(
+		@RequestParam Optional<Integer> page,
+		@RequestParam Optional<String> sortBy
+	) {
+		return signalementRepository.findAll(
+			PageRequest.of(
+				page.orElse(0),
+				nbrPage,
+				Sort.Direction.ASC, sortBy.orElse("id")
+			)
+		);
+	}
+
+	@GetMapping("/signalements")
+	public List<Signalement> getAllSignalement(
+		@RequestParam(value = "avant", required = false) java.sql.Date avant,
+		@RequestParam(value = "apres", required = false) java.sql.Date apres,
+		@RequestParam(value = "type", required = false) Long type,
+		@RequestParam(value = "etat", required = false) Long etat,
+		@RequestParam Optional<Integer> page ) {
+		return signalementService.findSignalement(type,etat,avant,apres,
+		PageRequest.of(
+			page.orElse(0),
+			nbrPage
+		)
+		).getContent();
+	}
+	
+	@GetMapping("/signalement/region/{id}")
+	public Page<Signalement> getAllSignalementByRegion(
+		@PathVariable(value = "id") Long regionId,
+		@RequestParam(value = "avant", required = false) java.sql.Date avant,
+		@RequestParam(value = "apres", required = false) java.sql.Date apres,
+		@RequestParam(value = "type", required = false) Long type,
+		@RequestParam(value = "etat", required = false) Long etat,
+		@RequestParam Optional<Integer> page,
+		@RequestParam Optional<String> sortBy ) {
+		return signalementService.findSignalementByRegion(
+			regionId, type, etat, avant, apres,
+			PageRequest.of(
+				page.orElse(0),
+				nbrPage)
+		);
 	}
 	
 	@GetMapping("/signalement/utilisateur/{id}")
 	public List<Signalement> getAllSignalementByUtilisateur(@PathVariable(value = "id") Long utilisateurId) {
 		return signalementRepository.findSignalementByUser(utilisateurId);
-	}
-	
-	@GetMapping("/signalement/region/{id}")
-	public List<Signalement> getAllSignalementByRegion(@PathVariable(value = "id") Long regionId) {
-		return signalementRepository.findSignalementByRegion(regionId);
 	}
 
 	@GetMapping("/signalement/jour")
@@ -104,8 +162,8 @@ public class SignalementControlleur {
 
 	@GetMapping("/signalement/{id}")
 	public ResponseEntity<Signalement> getSignalementById(@PathVariable(value = "id") Long signalementId)
-			throws ResourceNotFoundException {
-		Signalement signalement = signalementRepository.findById(signalementId)
+			throws Throwable {
+		Signalement signalement = (Signalement) signalementRepository.findById(signalementId)
 				.orElseThrow(() -> new ResourceNotFoundException("signalement not found for this id :: " + signalementId));
 		return ResponseEntity.ok().body(signalement);
 	}
@@ -114,13 +172,13 @@ public class SignalementControlleur {
 	public Signalement createSignalement(@Validated @RequestBody Signalement signalement) throws ParseException {
 		Date daty = new Date();
 		signalement.setDateSignalement(daty);
-		return signalementRepository.save(signalement);
+		return (Signalement) signalementRepository.save(signalement);
 	}
 	
 	@PutMapping("/signalement/{id}")
 	public ResponseEntity<Signalement> updateSignalement(@PathVariable(value = "id") Long signalementId,
-			@Validated @RequestBody Signalement signalementDetails) throws ResourceNotFoundException {
-		Signalement signalement = signalementRepository.findById(signalementId)
+			@Validated @RequestBody Signalement signalementDetails) throws Throwable {
+		Signalement signalement = (Signalement) signalementRepository.findById(signalementId)
 				.orElseThrow(() -> new ResourceNotFoundException("signalement not found for this id :: " + signalementId));
 		Date daty = new Date();
 		signalement.setType(signalementDetails.getType());
@@ -133,17 +191,18 @@ public class SignalementControlleur {
 		signalement.setLatitude(signalementDetails.getLatitude());
 		signalement.setDescription(signalementDetails.getDescription());
 		if(signalementDetails.getEtat().getId()==3) {
-//			notificationRepository.save(new Notification(signalement));
+			Notification notification = new Notification(signalement);
+			notificationService.createNotification(notification);
 			signalement.setDateFinSignalement(daty);
 		}
-		final Signalement updatedSignalement = signalementRepository.save(signalement);
+		final Signalement updatedSignalement = (Signalement) signalementRepository.save(signalement);
 		return ResponseEntity.ok(updatedSignalement);
 	}
 
 	@DeleteMapping("/signalement/{id}")
 	public Map<String, Boolean> deleteSignalement(@PathVariable(value = "id") Long signalementId)
-			throws ResourceNotFoundException {
-		Signalement signalement = signalementRepository.findById(signalementId)
+			throws Throwable {
+		Signalement signalement = (Signalement) signalementRepository.findById(signalementId)
 				.orElseThrow(() -> new ResourceNotFoundException("signalement not found for this id :: " + signalementId));
 
 		signalementRepository.delete(signalement);

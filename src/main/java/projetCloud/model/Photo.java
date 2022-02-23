@@ -34,6 +34,11 @@ public class Photo {
 		this.title = title;
 	}
 
+    public Photo(Long idSignalement){
+        super();
+		this.idSignalement = idSignalement;
+    }
+
 	public String getId(){
         return id;
     }
