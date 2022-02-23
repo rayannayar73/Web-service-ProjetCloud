@@ -34,8 +34,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javafx.beans.binding.BooleanExpression;
-
 import com.google.common.base.Joiner;
 
 import projetCloud.model.*;
