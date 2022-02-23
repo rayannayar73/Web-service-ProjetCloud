@@ -40,9 +40,8 @@ import com.google.common.base.Joiner;
 
 import projetCloud.model.*;
 import projetCloud.repository.*;
+import projetCloud.service.NotificationService;
 import projetCloud.service.SignalementService;
-import projetCloud.specification.SearchOperation;
-import projetCloud.specification.SignalementSpecificationsBuilder;
 @RestController
 @RequestMapping("/ato")
 public class SignalementControlleur {
