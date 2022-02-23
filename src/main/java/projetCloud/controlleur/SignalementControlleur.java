@@ -54,6 +54,7 @@ public class SignalementControlleur {
 
 	private int nbrPage = 5;
 
+	private NotificationService notificationService;
 
 	@GetMapping("/signalement")
 	public Page<Signalement> getAllSignalement(
@@ -191,7 +192,8 @@ public class SignalementControlleur {
 		signalement.setLatitude(signalementDetails.getLatitude());
 		signalement.setDescription(signalementDetails.getDescription());
 		if(signalementDetails.getEtat().getId()==3) {
-//			notificationRepository.save(new Notification(signalement));
+			Notification notification = new Notification(signalement);
+			notificationService.createNotification(notification);
 			signalement.setDateFinSignalement(daty);
 		}
 		final Signalement updatedSignalement = (Signalement) signalementRepository.save(signalement);

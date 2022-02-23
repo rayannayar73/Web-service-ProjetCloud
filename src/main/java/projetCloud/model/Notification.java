@@ -1,5 +1,7 @@
 package projetCloud.model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,6 +21,9 @@ public class Notification {
 	
 	@ManyToOne
 	private Signalement signalement;
+
+	@Column(name = "date")
+    private Date daty;
 
 
 	public long getId() {
@@ -48,6 +53,7 @@ public class Notification {
 
 	public Notification(Signalement signalement) {
 		super();
+		this.daty = new Date();
 		this.signalement = signalement;
 	}
 
@@ -56,5 +62,21 @@ public class Notification {
 		this.id = id;
 		this.signalement = signalement;
 	}
+
+	
+
+    /**
+     * @return Date return the daty
+     */
+    public Date getDaty() {
+        return daty;
+    }
+
+    /**
+     * @param daty the daty to set
+     */
+    public void setDaty(Date daty) {
+        this.daty = daty;
+    }
 
 }
