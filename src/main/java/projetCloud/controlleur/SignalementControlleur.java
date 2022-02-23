@@ -54,7 +54,7 @@ public class SignalementControlleur {
 	private NotificationService notificationService;
 
 	@GetMapping("/signalement")
-	public Page<Signalement> getAllSignalement(
+	public List<Signalement> getAllSignalement(
 		@RequestParam Optional<Integer> page,
 		@RequestParam Optional<String> sortBy
 	) {
@@ -64,7 +64,7 @@ public class SignalementControlleur {
 				nbrPage,
 				Sort.Direction.ASC, sortBy.orElse("id")
 			)
-		);
+		).getContent();
 	}
 
 	@GetMapping("/signalements")
