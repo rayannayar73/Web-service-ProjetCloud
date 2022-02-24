@@ -27,9 +27,9 @@ public class PhotoController {
 
     private PhotoService photoService;
 
-    @PostMapping("/photos")
+    @PostMapping("/photos/{idSignalement}"")
     public Photo addPhoto(
-        @RequestParam("idSignalement")Long idSignalement, 
+        @PathVariable(value = "idSignalement") Long signalementId, 
         @RequestPart("image") MultipartFile image) 
         throws IOException {
             Photo retour = photoService.addPhoto(idSignalement, image);
