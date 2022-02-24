@@ -27,7 +27,7 @@ public class PhotoController {
 
     private PhotoService photoService;
 
-    @PostMapping("/photos/{idSignalement}"")
+    @PostMapping("/photos/{idSignalement}")
     public Photo addPhoto(
         @PathVariable(value = "idSignalement") Long signalementId, 
         @RequestPart("image") MultipartFile image) 
