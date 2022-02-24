@@ -32,7 +32,7 @@ public class PhotoController {
         @PathVariable(value = "idSignalement") Long signalementId, 
         @RequestPart("image") MultipartFile image) 
         throws IOException {
-            Photo retour = photoService.addPhoto(idSignalement, image);
+            Photo retour = photoService.addPhoto(signalementId, image);
             return retour;
     }
 
