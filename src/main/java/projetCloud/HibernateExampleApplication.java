@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import projetCloud.model.Admin;
 import projetCloud.model.Etat;
 import projetCloud.model.Region;
 import projetCloud.model.Signalement;
@@ -44,7 +45,7 @@ public class HibernateExampleApplication  implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		// utilisateurService.createAdmin(new Utilisateur("ravelojaona","rayan","rayan@gmail.com","12qsQasdef34"));
+		utilisateurService.createAdmin(new Admin("ravelojaona","rayan","rayan@gmail.com","RAYANnayar73"));
 
 		utilisateur.save(new Utilisateur(1,"rayan","nayar","rayan@gmail.com","1234rayanNayar"));
 

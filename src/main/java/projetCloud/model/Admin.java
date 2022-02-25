@@ -1,5 +1,7 @@
 package projetCloud.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "admin")
-public class Admin {
+public class Admin implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,6 +36,11 @@ public class Admin {
 	public Admin(long id) {
 		super();
 		this.id = id;
+	}
+
+	public Admin(String email) {
+		super();
+		this.email = email;
 	}
 
 	public Admin(String nom, String prenom, String email, String mdp) {

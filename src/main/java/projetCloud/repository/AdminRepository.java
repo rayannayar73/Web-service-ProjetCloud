@@ -6,4 +6,5 @@ import projetCloud.model.Admin;
 
 public interface AdminRepository extends JpaRepository<Admin, Long>{
 
+    Admin findByEmail(String Email);
 }
