@@ -18,8 +18,8 @@ public class PhotoService {
     @Autowired
     private PhotoRepository photoRepo;
 
-    public Photo addPhoto(String title, long idSignalement, MultipartFile file) throws IOException { 
-        Photo photo = new Photo(title, idSignalement); 
+    public Photo addPhoto(long idSignalement, MultipartFile file) throws IOException { 
+        Photo photo = new Photo( idSignalement); 
         photo.setImage(
           new Binary(BsonBinarySubType.BINARY, file.getBytes())
         ); 

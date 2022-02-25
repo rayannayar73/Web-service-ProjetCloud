@@ -30,10 +30,9 @@ public class PhotoController {
     @PostMapping("/photos")
     public Photo addPhoto(
         @RequestParam("idSignalement")Long idSignalement, 
-        @RequestParam("title") String title, 
         @RequestPart("image") MultipartFile image) 
         throws IOException {
-            Photo retour = photoService.addPhoto(title, idSignalement, image);
+            Photo retour = photoService.addPhoto(idSignalement, image);
             return retour;
     }
 
