@@ -21,7 +21,8 @@ public class CorsConfig {
                         .allowedOrigins(allowedOrigin,
                                         "http://localhost:3000/",
                                         "https://frontofficeprojetcloud.herokuapp.com/",
-                                        "https://projetcloudrayansedraravo.herokuapp.com/")
+                                        "https://projetcloudrayansedraravo.herokuapp.com/",
+                                        "https://mobilecloudrojo.herokuapp.com/")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
