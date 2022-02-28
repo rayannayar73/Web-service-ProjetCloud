@@ -49,7 +49,7 @@ public class SignalementControlleur {
 	@Autowired
 	private SignalementService signalementService;
 
-	private int nbrPage = 5;
+	private int nbrPage = 10;
 
 	private NotificationService notificationService;
 
