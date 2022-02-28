@@ -23,7 +23,7 @@ public class CorsConfig {
                                         "https://frontofficeprojetcloud.herokuapp.com/",
                                         "https://projetcloudrayansedraravo.herokuapp.com/",
                                         "https://mobilecloudrojo.herokuapp.com/",
-                                        "https://backoffice-rrs.herokuapp.com/admin/dashboard")
+                                        "https://backoffice-rrs.herokuapp.com/")
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
                         .allowedHeaders("*");
             }
