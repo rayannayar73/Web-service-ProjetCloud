@@ -68,7 +68,6 @@ public class HibernateExampleApplication  implements CommandLineRunner {
 		signalementRepository.save(new Signalement((float)47.508899,(float)-18.908718,new Date(ajd.getTime()-(1000*60*60*48)),new Type(1),new Etat(1),new Utilisateur(1)));
 		signalementRepository.save(new Signalement((float)47.505972,(float)-18.910390,new Date(ajd.getTime()-(1000*60*60*48)),new Type(2),new Etat(3),new Utilisateur(1)));
 		signalementRepository.save(new Signalement((float)47.500972,(float)-18.910390,new Date(ajd.getTime()-(1000*60*60*24)),new Type(2),new Etat(3),new Utilisateur(1)));
-		signalementRepository.save(new Signalement((float)47.507972,(float)-18.910390,new Date(ajd.getTime()-(1000*60*60*72)),new Type(3),new Etat(1),new Utilisateur(1)));
 		
 	}
 
