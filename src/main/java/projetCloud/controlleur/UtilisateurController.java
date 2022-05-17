@@ -29,7 +29,8 @@ public class UtilisateurController {
 	private UtilisateurService utilisateurService;
 
 	@GetMapping("/utilisateur")
-	public List<Utilisateur> getAllEmployees() {
+	public List<Utilisateur> getAllEmployees() 
+	{
 		return utilisateurRepository.findAll();
 	}
 
