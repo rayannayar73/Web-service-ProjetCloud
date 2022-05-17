@@ -42,7 +42,8 @@ import projetCloud.service.NotificationService;
 import projetCloud.service.SignalementService;
 @RestController
 @RequestMapping("/ato")
-public class SignalementControlleur {
+public class SignalementControlleur 
+{
 	@Autowired
 	private SignalementRepository signalementRepository;
 
